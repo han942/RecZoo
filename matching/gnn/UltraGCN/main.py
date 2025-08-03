@@ -397,6 +397,11 @@ def train(model, optimizer, train_loader, test_loader, mask, test_ground_truth_l
 
         for batch, x in enumerate(train_loader): # x: tensor:[users, pos_items]
             users, pos_items, neg_items = Sampling(x, params['item_num'], params['negative_num'], interacted_items, params['sampling_sift_pos'])
+            ####
+            users = users.long()
+            pos_items = pos_items.long()
+            neg_items = neg_items.long()
+
             users = users.to(device)
             pos_items = pos_items.to(device)
             neg_items = neg_items.to(device)
